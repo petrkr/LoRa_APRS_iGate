@@ -1,4 +1,5 @@
 #include <WiFi.h>
+#include <ETH.h>
 #include "configuration.h"
 #include "station_utils.h"
 #include "battery_utils.h"
@@ -8,6 +9,7 @@
 #include "A7670_utils.h"
 #include "lora_utils.h"
 #include "wifi_utils.h"
+#include "eth_utils.h"
 #include "gps_utils.h"
 #include "bme_utils.h"
 #include "display.h"
@@ -69,6 +71,8 @@ namespace Utils {
     }
 
     String getLocalIP() {
+        return "IP :  " + String(ETH.localIP()[0]) + "." + String(ETH.localIP()[1]) + "." + String(ETH.localIP()[2]) + "." + String(ETH.localIP()[3]);
+
         if (!WiFiConnected) {
             return "IP :  192.168.4.1";
         } else if (backUpDigiMode) {

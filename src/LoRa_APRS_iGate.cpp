@@ -27,6 +27,7 @@ ________________________________________________________________________________
 #include "power_utils.h"
 #include "lora_utils.h"
 #include "wifi_utils.h"
+#include "eth_utils.h"
 #include "digi_utils.h"
 #include "gps_utils.h"
 #include "bme_utils.h"
@@ -111,7 +112,8 @@ void setup() {
             Config.loramodule.rxActive = false;
         }
     #endif
-    WIFI_Utils::setup();
+    //WIFI_Utils::setup();
+    ETH_Utils::setup();
     SYSLOG_Utils::setup();
     BME_Utils::setup();
     WEB_Utils::setup();
@@ -123,7 +125,7 @@ void setup() {
 }
 
 void loop() {
-    WIFI_Utils::checkIfAutoAPShouldPowerOff();
+    //WIFI_Utils::checkIfAutoAPShouldPowerOff();
 
     if (isUpdatingOTA) {
         ElegantOTA.loop();
@@ -136,7 +138,9 @@ void loop() {
 
     thirdLine = Utils::getLocalIP();
 
-    WIFI_Utils::checkWiFi(); // Always use WiFi, not related to IGate/Digi mode
+    //WIFI_Utils::checkWiFi(); // Always use WiFi, not related to IGate/Digi mode
+
+    ETH_Utils::checkEth(); // Always use WiFi, not related to IGate/Digi mode
 
     #ifdef HAS_A7670
         if (Config.aprs_is.active && !modemLoggedToAPRSIS) A7670_Utils::APRS_IS_connect();
