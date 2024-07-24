@@ -175,7 +175,7 @@ void loop() {
     #ifdef HAS_A7670
         if (Config.aprs_is.active && !modemLoggedToAPRSIS) A7670_Utils::APRS_IS_connect();
     #else
-        if (Config.aprs_is.active && (WiFi.status() == WL_CONNECTED) && !espClient.connected()) APRS_IS_Utils::connect();
+        if (Config.aprs_is.active && eth_connected && !espClient.connected()) APRS_IS_Utils::connect();
     #endif
 
     TNC_Utils::loop();
