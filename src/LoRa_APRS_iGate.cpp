@@ -15,6 +15,7 @@ ________________________________________________________________________________
 #include <ElegantOTA.h>
 #include <Arduino.h>
 #include <WiFi.h>
+#include <ETH.h>
 #include <vector>
 #include "configuration.h"
 #include "battery_utils.h"
@@ -59,6 +60,32 @@ String firstLine, secondLine, thirdLine, fourthLine, fifthLine, sixthLine, seven
 
 //#define STARTUP_DELAY 5 //min
 
+bool eth_connected = false;
+
+void onEvent(arduino_event_id_t event) {
+  String hostName = "iGATE-" + Config.callsign;
+  switch (event) {
+    case ARDUINO_EVENT_ETH_START:
+      Serial.println("ETH Started");
+      ETH.setHostname(hostName.c_str());
+      break;
+    case ARDUINO_EVENT_ETH_CONNECTED: Serial.println("ETH Connected"); break;
+    case ARDUINO_EVENT_ETH_GOT_IP:
+      Serial.println("ETH Got IP");
+      eth_connected = true;
+      break;
+    case ARDUINO_EVENT_ETH_DISCONNECTED:
+      Serial.println("ETH Disconnected");
+      eth_connected = false;
+      break;
+    case ARDUINO_EVENT_ETH_STOP:
+      Serial.println("ETH Stopped");
+      eth_connected = false;
+      break;
+    default: break;
+  }
+}
+
 void setup() {
     Serial.begin(115200);
     POWER_Utils::setup();
@@ -66,6 +93,9 @@ void setup() {
     LoRa_Utils::setup();
     Utils::validateFreqs();
     GPS_Utils::generateBeacons();
+
+    // Old SDK 4.x this have in WiFi class even for Ethernet events
+    WiFi.onEvent(onEvent);
 
     #ifdef STARTUP_DELAY    // (TEST) just to wait for WiFi init of Routers
     displayShow("", "  STARTUP DELAY ...", "", "", 0);
