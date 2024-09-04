@@ -67,7 +67,7 @@ void displaySetup() {
                     digitalWrite(OLED_RST, HIGH);
                 #endif
 
-                #if defined(HELTEC_WS) || defined(HELTEC_WSL_V3_DISPLAY)
+                #if defined(HELTEC_WS) || defined(HELTEC_WSL_V3_DISPLAY) || defined(ESP32_OctopusLab_LAN_LoRa)
                     Wire.begin(BOARD_I2C_SDA, BOARD_I2C_SCL);
                 #endif
 
