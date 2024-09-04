@@ -257,8 +257,8 @@
 #endif
 
 #if defined(ESP32_OctopusLab_LAN_LoRa)
-    #define OLED_SDA            2
-    #define OLED_SCL            16
+    #define BOARD_I2C_SDA       2
+    #define BOARD_I2C_SCL       16
     #define OLED_RST            -1
     #define RADIO_SCLK_PIN      33
     #define RADIO_MISO_PIN      35
