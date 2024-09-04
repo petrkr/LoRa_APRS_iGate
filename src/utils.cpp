@@ -39,6 +39,7 @@ extern int                  wxModuleType;
 extern bool                 backUpDigiMode;
 extern bool                 shouldSleepLowVoltage;
 extern bool                 transmitFlag;
+extern bool                 eth_connected;
 
 extern std::vector<LastHeardStation>    lastHeardStations;
 
@@ -60,7 +61,7 @@ namespace Utils {
             status.concat(",");
             status.concat(Config.beacon.path);
         }
-        if (WiFi.status() == WL_CONNECTED && Config.aprs_is.active && Config.beacon.sendViaAPRSIS) {
+        if (eth_connected && Config.aprs_is.active && Config.beacon.sendViaAPRSIS) {
             delay(1000);
             status.concat(",qAC:>https://github.com/richonguzman/LoRa_APRS_iGate ");
             status.concat(versionDate);
