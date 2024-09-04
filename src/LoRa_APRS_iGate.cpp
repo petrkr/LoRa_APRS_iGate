@@ -27,6 +27,7 @@ ________________________________________________________________________________
 #include "query_utils.h"
 #include "power_utils.h"
 #include "lora_utils.h"
+#include "ntp_utils.h"
 #include "wifi_utils.h"
 #include "eth_utils.h"
 #include "digi_utils.h"
@@ -148,6 +149,7 @@ void setup() {
     BME_Utils::setup();
     WEB_Utils::setup();
     TNC_Utils::setup();
+    NTP_Utils::setup();
     #ifdef HAS_A7670
         A7670_Utils::setup();
     #endif
@@ -217,4 +219,6 @@ void loop() {
     displayShow(firstLine, secondLine, thirdLine, fourthLine, fifthLine, sixthLine, seventhLine, 0);
     Utils::checkRebootTime();
     Utils::checkSleepByLowBatteryVoltage(1);
+
+    NTP_Utils::checkNtp();
 }
