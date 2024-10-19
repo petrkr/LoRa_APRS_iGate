@@ -1,5 +1,6 @@
 #include <TinyGPS++.h>
 #include <WiFi.h>
+#include <ETH.h>
 #include "configuration.h"
 #include "station_utils.h"
 #include "battery_utils.h"
@@ -9,6 +10,7 @@
 #include "A7670_utils.h"
 #include "lora_utils.h"
 #include "wifi_utils.h"
+#include "eth_utils.h"
 #include "gps_utils.h"
 #include "wx_utils.h"
 #include "display.h"
@@ -75,6 +77,8 @@ namespace Utils {
     }
 
     String getLocalIP() {
+        return "IP :  " + String(ETH.localIP()[0]) + "." + String(ETH.localIP()[1]) + "." + String(ETH.localIP()[2]) + "." + String(ETH.localIP()[3]);
+
         if (Config.digi.ecoMode) {
             return "** WiFi AP  Killed **";
         } else if (!WiFiConnected) {
