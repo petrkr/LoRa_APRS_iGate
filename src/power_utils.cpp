@@ -197,7 +197,7 @@ namespace POWER_Utils {
             pinMode(ADC_CTRL, OUTPUT);
         #endif
 
-        #if defined(HELTEC_WIRELESS_TRACKER)
+        #if defined(HELTEC_WIRELESS_TRACKER) || defined(ESP32_OctopusLab_LAN_LoRa)
             Wire.begin(BOARD_I2C_SDA, BOARD_I2C_SCL);
         #endif
 
