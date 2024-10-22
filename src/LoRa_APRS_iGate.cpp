@@ -41,7 +41,7 @@ ________________________________________________________________________________
     #include "A7670_utils.h"
 #endif
 
-String              versionDate             = "2024.10.21";
+String              versionDate             = "2024.10.21-lansupport-fork";
 Configuration       Config;
 WiFiClient          espClient;
 #ifdef HAS_GPS
