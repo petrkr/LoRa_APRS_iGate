@@ -266,6 +266,35 @@
     #define GPS_TX              33
 #endif
 
+#if defined(ESP32_OctopusLab_LAN_LoRa)
+    #define BOARD_I2C_SDA       2
+    #define BOARD_I2C_SCL       16
+    #define OLED_RST            -1
+    #define RADIO_SCLK_PIN      33
+    #define RADIO_MISO_PIN      35
+    #define RADIO_MOSI_PIN      32
+    #define RADIO_CS_PIN        5
+    #define RADIO_DIO1_PIN      34
+    #define RADIO_RST_PIN       -1
+    #define RADIO_BUSY_PIN      39
+#endif
+
+#if defined(ESP32_OctopusLab_LAN_LoRa_1W)
+    #undef HAS_DISPLAY
+//    #define BOARD_I2C_SDA       2
+//    #define BOARD_I2C_SCL       16
+//    #define OLED_RST            -1
+    #define RADIO_SCLK_PIN      33
+    #define RADIO_MISO_PIN      35
+    #define RADIO_MOSI_PIN      32
+    #define RADIO_CS_PIN        5
+    #define RADIO_DIO1_PIN      34
+    #define RADIO_RST_PIN       -1
+    #define RADIO_BUSY_PIN      39
+    #define RADIO_RXEN          2
+    #define RADIO_TXEN          16
+#endif
+
 /* (Same pins for LILYGO LoRa32 and ESP32 Wroom Dev )
 SX1278-------------------> ESP32 ttgo-lora32-v21 and ESP32 WROOM Dev
 GND                         GND
