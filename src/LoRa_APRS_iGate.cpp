@@ -68,7 +68,7 @@ ___________________________________________________________________*/
 #endif
 
 
-String              versionDate             = "2025-12-29";
+String              versionDate             = "2025-12-29-lansupport-fork";
 String              versionNumber           = "3.1.7";
 Configuration       Config;
 WiFiClient          aprsIsClient;
