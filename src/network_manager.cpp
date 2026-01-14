@@ -79,9 +79,44 @@ void NetworkManager::_processAPTimeout() {
     }
 }
 
+void NetworkManager::_onNetworkEvent(arduino_event_id_t event, arduino_event_info_t /*info*/) {
+    switch (event) {
+        case ARDUINO_EVENT_ETH_START:
+            Serial.println("ETH Started");
+            if (!_hostName.isEmpty()) {
+                Serial.println("ETH Setting Hostname: " + _hostName);
+                ETH.setHostname(_hostName.c_str());
+            }
+        break;
+        case ARDUINO_EVENT_ETH_CONNECTED:
+            Serial.println("ETH Connected");
+            break;
+        case ARDUINO_EVENT_ETH_GOT_IP:
+            Serial.println("ETH Got IP");
+            _ethernetConnected = true;
+            break;
+        case ARDUINO_EVENT_ETH_DISCONNECTED:
+            Serial.println("ETH Disconnected");
+            _ethernetConnected = false;
+            break;
+        case ARDUINO_EVENT_ETH_STOP:
+            Serial.println("ETH Stopped");
+            _ethernetConnected = false;
+            break;
+        default:
+            break;
+    }
+}
+
 // Initialize
 bool NetworkManager::setup() {
     Serial.println("Initializing Networking...");
+
+    WiFi.onEvent(
+        [this](arduino_event_id_t event, arduino_event_info_t info) {
+            _onNetworkEvent(event, info);
+        });
+
     return true;
 }
 
@@ -218,6 +253,22 @@ uint8_t* NetworkManager::getWiFimacAddress(uint8_t* mac) {
 String NetworkManager::getWiFimacAddress(void) const {
     return WiFi.macAddress();
 }
+
+// Ethernet methods
+bool NetworkManager::ethernetConnect(eth_phy_type_t type, uint8_t phy_addr, uint8_t mdc, uint8_t mdio, int power, eth_clock_mode_t clock_mode, bool use_mac_from_efuse) {
+        _ethernetMode = true;
+        Serial.println("Setting up Ethernet...");
+
+        #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+            // SDK 5.x (Arduino SDK 3.x)
+            #pragma message("Compiling ETH init: SDK 5.x (Arduino core 3.x)")
+            return ETH.begin(type, phy_addr, mdc, mdio, power, clock_mode, use_mac_from_efuse);
+        #else
+            // SDK 4.x (Arduino SDK 2.x)
+            #pragma message("Compiling ETH init: SDK 4.x (Arduino core 2.x)")
+            return ETH.begin(phy_addr, power, mdc, mdio, type, clock_mode, use_mac_from_efuse);
+        #endif
+    }
 
 // Check if network is available
 bool NetworkManager::isConnected() const {
