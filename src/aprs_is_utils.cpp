@@ -93,7 +93,7 @@ namespace APRS_IS_Utils {
 
     void checkStatus() {
         String wifiState, aprsisState;
-        if (networkManager->isWiFiConnected()) {
+        if (networkManager->isConnected()) {
             wifiState = "OK";
         } else {
             if (backUpDigiMode || Config.digi.ecoMode == 1 || Config.digi.ecoMode == 2) {

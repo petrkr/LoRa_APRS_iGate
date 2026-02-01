@@ -93,6 +93,8 @@ namespace Utils {
     String getLocalIP() {
         if (Config.digi.ecoMode == 1 || Config.digi.ecoMode == 2) {
             return "** WiFi AP  Killed **";
+        } else if (networkManager->isEthernetConnected()) {
+            return "IP :  " + String(networkManager->getEthernetIP());
         } else if (!networkManager->isWiFiConnected() && networkManager->isWifiAPActive()) {
             return "IP :  " + String(networkManager->getWiFiAPIP());
         } else if (backUpDigiMode) {
