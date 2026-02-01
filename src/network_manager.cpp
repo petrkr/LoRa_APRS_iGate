@@ -270,6 +270,19 @@ bool NetworkManager::ethernetConnect(eth_phy_type_t type, uint8_t phy_addr, uint
         #endif
     }
 
+bool NetworkManager::ethernetDisconnect() {
+    _ethernetMode = false;
+    _ethernetConnected = false;
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+    ETH.end();
+#endif
+    return true;
+}
+
+IPAddress NetworkManager::getEthernetIP() const {
+    return ETH.localIP();
+}
+
 // Check if network is available
 bool NetworkManager::isConnected() const {
     return isWiFiConnected() || isEthernetConnected() || isModemConnected();
@@ -286,8 +299,7 @@ bool NetworkManager::isWifiAPActive() const {
 
 // Check if Ethernet is connected
 bool NetworkManager::isEthernetConnected() const {
-    // Implement Ethernet connection check logic here
-    return false;
+    return _ethernetConnected;
 }
 
 // Check if Modem is connected

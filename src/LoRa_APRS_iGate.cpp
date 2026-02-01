@@ -56,6 +56,9 @@ ___________________________________________________________________*/
 #include "lora_utils.h"
 #include "wifi_utils.h"
 #include "digi_utils.h"
+#ifdef HAS_ETH
+    #include "eth_utils.h"
+#endif
 #include "gps_utils.h"
 #include "web_utils.h"
 #include "tnc_utils.h"
@@ -102,7 +105,9 @@ void setup() {
     Serial.begin(115200);
     networkManager = new NetworkManager();
     networkManager->setup();
+#ifndef HAS_ETH
     networkManager->setAPTimeout(Config.wifiAutoAP.timeout * 60 * 1000); // Convert minutes to milliseconds
+#endif
     networkManager->setHostName("iGATE-" + Config.callsign);
     POWER_Utils::setup();
     Utils::setupDisplay();
@@ -112,7 +117,11 @@ void setup() {
     STATION_Utils::loadBlacklistAndManagers();
     Utils::startupDelay();
     SLEEP_Utils::setup();
+#ifdef HAS_ETH
+    ETH_Utils::setup();
+#else
     WIFI_Utils::setup();
+#endif
     NTP_Utils::setup();
     SYSLOG_Utils::setup();
     WX_Utils::setup();

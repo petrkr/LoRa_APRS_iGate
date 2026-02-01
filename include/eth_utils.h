@@ -5,7 +5,7 @@
 
 
 namespace ETH_Utils {
-    void startEth();
+    void startEthernet();
     void setup();
 }
 
