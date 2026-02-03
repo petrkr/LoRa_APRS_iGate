@@ -270,6 +270,19 @@ namespace WEB_Utils {
             Config.mqtt.beaconOverMqtt      = request->hasParam("mqtt.beaconOverMqtt", true);
         }
 
+        // Ethernet configuration (only if board supports it)
+        #ifdef HAS_ETH
+        Config.ethConfig.enabled                = request->hasParam("ethernet.enabled", true);
+        Config.ethConfig.useStaticIP            = request->hasParam("ethernet.useStaticIP", true);
+        if (Config.ethConfig.useStaticIP) {
+            Config.ethConfig.staticIP           = getParamStringSafe("ethernet.staticIP", Config.ethConfig.staticIP);
+            Config.ethConfig.gateway            = getParamStringSafe("ethernet.gateway", Config.ethConfig.gateway);
+            Config.ethConfig.subnet             = getParamStringSafe("ethernet.subnet", Config.ethConfig.subnet);
+            Config.ethConfig.dns1               = getParamStringSafe("ethernet.dns1", Config.ethConfig.dns1);
+            Config.ethConfig.dns2               = getParamStringSafe("ethernet.dns2", Config.ethConfig.dns2);
+        }
+        #endif
+
         Config.rebootMode                   = request->hasParam("other.rebootMode", true);
         if (Config.rebootMode) {
             Config.rebootModeTime           = getParamIntSafe("other.rebootModeTime", Config.rebootModeTime);
