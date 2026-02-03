@@ -74,7 +74,7 @@ void NetworkManager::_processAPTimeout() {
     }
 
     if (millis() - _apStartup > _apTimeout) {
-        Serial.println("AP timeout reached. Disabling AP mode.");
+        Serial.println("[NM] AP timeout reached. Disabling AP mode.");
         disableAP();
     }
 }
@@ -135,7 +135,7 @@ void NetworkManager::setHostName(const String& hostName) {
 bool NetworkManager::setupAP(String apName, String apPsk) {
     _wifiAPmode = true;
 
-    Serial.println("Starting AP mode: " + apName);
+    Serial.println("[NM] Starting AP mode: " + apName);
 
     // Full WiFi reset sequence
     WiFi.disconnect(true);
@@ -149,16 +149,16 @@ bool NetworkManager::setupAP(String apName, String apPsk) {
     delay(1000); // Give AP time to fully initialize
 
     if (apStarted) {
-        Serial.println("AP setup successful");
+        Serial.println("[NM] AP setup successful");
         _apStartup = millis();
     }
     else {
-        Serial.println("AP setup failed");
+        Serial.println("[NM] AP setup failed");
         return false;
     }
 
     IPAddress apIP = getWiFiAPIP();
-    Serial.println("AP IP assigned: " + apIP.toString());
+    Serial.println("[NM] AP IP assigned: " + apIP.toString());
 
     return true;
 }
@@ -171,7 +171,7 @@ bool NetworkManager::disableAP() {
 }
 
 void NetworkManager::setAPTimeout(unsigned long timeout) {
-    Serial.println("Setting AP timeout to " + String(timeout / 1000) + " sec");
+    Serial.println("[NM] Setting AP timeout to " + String(timeout / 1000) + " sec");
     _apTimeout = timeout;
 }
 
