@@ -162,6 +162,14 @@ bool Configuration::writeFile() {
         data["mqtt"]["port"]                        = mqtt.port;
         data["mqtt"]["beaconOverMqtt"]              = mqtt.beaconOverMqtt;
 
+        data["ethernet"]["enabled"]                 = ethConfig.enabled;
+        data["ethernet"]["useStaticIP"]             = ethConfig.useStaticIP;
+        data["ethernet"]["staticIP"]                = ethConfig.staticIP;
+        data["ethernet"]["gateway"]                 = ethConfig.gateway;
+        data["ethernet"]["subnet"]                  = ethConfig.subnet;
+        data["ethernet"]["dns1"]                    = ethConfig.dns1;
+        data["ethernet"]["dns2"]                    = ethConfig.dns2;
+
         data["ota"]["username"]                     = ota.username;
         data["ota"]["password"]                     = ota.password;
 
@@ -386,6 +394,21 @@ bool Configuration::readFile() {
         mqtt.port                       = data["mqtt"]["port"] | 1883;
         mqtt.beaconOverMqtt             = data["mqtt"]["beaconOverMqtt"] | false;
 
+        if (!data["ethernet"].containsKey("enabled") ||
+            !data["ethernet"].containsKey("useStaticIP") ||
+            !data["ethernet"].containsKey("staticIP") ||
+            !data["ethernet"].containsKey("gateway") ||
+            !data["ethernet"].containsKey("subnet") ||
+            !data["ethernet"].containsKey("dns1") ||
+            !data["ethernet"].containsKey("dns2")) needsRewrite = true;
+        ethConfig.enabled               = data["ethernet"]["enabled"] | false;
+        ethConfig.useStaticIP           = data["ethernet"]["useStaticIP"] | false;
+        ethConfig.staticIP              = data["ethernet"]["staticIP"] | "";
+        ethConfig.gateway               = data["ethernet"]["gateway"] | "";
+        ethConfig.subnet                = data["ethernet"]["subnet"] | "255.255.255.0";
+        ethConfig.dns1                  = data["ethernet"]["dns1"] | "";
+        ethConfig.dns2                  = data["ethernet"]["dns2"] | "";
+
         if (!data["ota"].containsKey("username") ||
             !data["ota"].containsKey("password")) needsRewrite = true;
         ota.username                    = data["ota"]["username"] | "";
@@ -541,6 +564,14 @@ void Configuration::setDefaultValues() {
     mqtt.password                   = "";
     mqtt.port                       = 1883;
     mqtt.beaconOverMqtt             = false;
+
+    ethConfig.enabled               = false;
+    ethConfig.useStaticIP           = false;
+    ethConfig.staticIP              = "";
+    ethConfig.gateway               = "";
+    ethConfig.subnet                = "255.255.255.0";
+    ethConfig.dns1                  = "";
+    ethConfig.dns2                  = "";
 
     ota.username                    = "";
     ota.password                    = "";
