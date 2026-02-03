@@ -110,7 +110,7 @@ void NetworkManager::_onNetworkEvent(arduino_event_id_t event, arduino_event_inf
 
 // Initialize
 bool NetworkManager::setup() {
-    Serial.println("Initializing Networking...");
+    Serial.println("[NM] Initializing Networking...");
 
     WiFi.onEvent(
         [this](arduino_event_id_t event, arduino_event_info_t info) {
