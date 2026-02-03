@@ -240,6 +240,18 @@ function loadSettings(settings) {
     document.getElementById("wifi.autoAP.timeout").value                = settings.wifi.autoAP.timeout;
     toggleWiFiAutoAPFields();
 
+    // Ethernet
+    if (settings.ethernet) {
+        document.getElementById("ethernet.enabled").checked              = settings.ethernet.enabled;
+        document.getElementById("ethernet.useStaticIP").checked          = settings.ethernet.useStaticIP;
+        document.getElementById("ethernet.staticIP").value               = settings.ethernet.staticIP;
+        document.getElementById("ethernet.gateway").value                = settings.ethernet.gateway;
+        document.getElementById("ethernet.subnet").value                 = settings.ethernet.subnet;
+        document.getElementById("ethernet.dns1").value                   = settings.ethernet.dns1;
+        document.getElementById("ethernet.dns2").value                   = settings.ethernet.dns2;
+        toggleEthernetStaticFields();
+    }
+
     // OTA
     document.getElementById("ota.username").value                       = settings.ota.username;
     document.getElementById("ota.password").value                       = settings.ota.password;
@@ -434,6 +446,22 @@ WebadminCheckbox.addEventListener("change", function () {
     WebadminUsername.disabled   = !this.checked;
     WebadminPassword.disabled   = !this.checked;
 });
+
+// Ethernet Switches
+const EthernetStaticCheckbox        = document.querySelector('input[name="ethernet.useStaticIP"]');
+EthernetStaticCheckbox.addEventListener("change", function () {
+    toggleEthernetStaticFields();
+});
+
+function toggleEthernetStaticFields() {
+    const isStatic = EthernetStaticCheckbox.checked;
+    const staticConfig = document.getElementById('eth-static-config');
+    const staticConfig2 = document.getElementById('eth-static-config-2');
+    const staticConfig3 = document.getElementById('eth-static-config-3');
+    if (staticConfig) staticConfig.style.display = isStatic ? 'flex' : 'none';
+    if (staticConfig2) staticConfig2.style.display = isStatic ? 'flex' : 'none';
+    if (staticConfig3) staticConfig3.style.display = isStatic ? 'flex' : 'none';
+}
 
 // WiFi Auto AP Switches
 const WiFiAutoAPCheckbox             = document.querySelector('input[name="wifi.autoAP.enabled"]');
