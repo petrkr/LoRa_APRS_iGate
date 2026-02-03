@@ -37,6 +37,17 @@ public:
     int     timeout;
 };
 
+class ETH_Config {
+public:
+    bool    enabled;            // Enable Ethernet
+    bool    useStaticIP;        // Use static IP instead of DHCP
+    String  staticIP;           // Static IP address
+    String  gateway;            // Gateway
+    String  subnet;             // Subnet mask
+    String  dns1;               // Primary DNS
+    String  dns2;               // Secondary DNS
+};
+
 class BEACON {
 public:
     double  latitude;
@@ -194,6 +205,7 @@ public:
     NTP                     ntp;    
     REMOTE_MANAGEMENT       remoteManagement;
     MQTT                    mqtt;
+    ETH_Config              ethConfig;
 
     void setDefaultValues();
     bool writeFile();
