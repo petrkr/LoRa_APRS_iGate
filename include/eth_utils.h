@@ -3,10 +3,8 @@
 
 #include <Arduino.h>
 
-
 namespace ETH_Utils {
-    void startEth();
-    void setup();
+    bool setup();
 }
 
 #endif
