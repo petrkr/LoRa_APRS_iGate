@@ -63,6 +63,9 @@ ___________________________________________________________________*/
 #include "wx_utils.h"
 #include "display.h"
 #include "utils.h"
+#ifdef HAS_ETH
+    #include "eth_utils.h"
+#endif
 #ifdef HAS_A7670
     #include "A7670_utils.h"
 #endif
@@ -114,6 +117,9 @@ void setup() {
     STATION_Utils::loadBlacklistAndManagers();
     Utils::startupDelay();
     SLEEP_Utils::setup();
+    #ifdef HAS_ETH
+        ETH_Utils::setup();
+    #endif
     WIFI_Utils::setup();
     NTP_Utils::setup();
     SYSLOG_Utils::setup();
