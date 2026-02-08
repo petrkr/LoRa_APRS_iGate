@@ -374,6 +374,160 @@
                         </div>
                         <hr>
 
+                        <div class="row my-5 d-flex align-items-top" id="ethernet-section">
+                            <div class="col-lg-3 col-sm-12">
+                                <h5>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        fill="currentColor"
+                                        class="bi bi-router"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M5.525 3.025a3.5 3.5 0 0 1 4.95 0 .5.5 0 1 0 .707-.707 4.5 4.5 0 0 0-6.364 0 .5.5 0 0 0 .707.707"
+                                        />
+                                        <path
+                                            d="M6.94 4.44a1.5 1.5 0 0 1 2.12 0 .5.5 0 0 0 .708-.708 2.5 2.5 0 0 0-3.536 0 .5.5 0 0 0 .707.707Z"
+                                        />
+                                        <path
+                                            d="M2.974 2.342a.5.5 0 1 0-.948.316L3.806 8H1.5A1.5 1.5 0 0 0 0 9.5v2A1.5 1.5 0 0 0 1.5 13H2a.5.5 0 0 0 .5.5h2A.5.5 0 0 0 5 13h6a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5h.5a1.5 1.5 0 0 0 1.5-1.5v-2A1.5 1.5 0 0 0 14.5 8h-2.306l1.78-5.342a.5.5 0 1 0-.948-.316L11.14 8H4.86zM2.5 11a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m4.5-.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2.5.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m1.5-.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0"
+                                        />
+                                        <path
+                                            d="M8.5 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"
+                                        />
+                                        <path
+                                            d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"
+                                        />
+                                    </svg>
+                                    Ethernet
+                                </h5>
+                                <small>Wired network connection</small>
+                            </div>
+                            <div class="col-lg-9 col-sm-12">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-check form-switch">
+                                            <input
+                                                type="checkbox"
+                                                name="ethernet.enabled"
+                                                id="ethernet.enabled"
+                                                class="form-check-input"
+                                            />
+                                            <label
+                                                for="ethernet.enabled"
+                                                class="form-label"
+                                                >Enable Ethernet</label
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-check form-switch">
+                                            <input
+                                                type="checkbox"
+                                                name="ethernet.useStaticIP"
+                                                id="ethernet.useStaticIP"
+                                                class="form-check-input"
+                                            />
+                                            <label
+                                                for="ethernet.useStaticIP"
+                                                class="form-label"
+                                                >Use Static IP</label
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3" id="eth-static-config" style="display: none;">
+                                    <div class="col-6">
+                                        <label
+                                            for="ethernet.staticIP"
+                                            class="form-label"
+                                            >Static IP</label
+                                        >
+                                        <div class="input-group">
+                                            <input
+                                                type="text"
+                                                name="ethernet.staticIP"
+                                                id="ethernet.staticIP"
+                                                class="form-control"
+                                                placeholder="192.168.1.100"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label
+                                            for="ethernet.gateway"
+                                            class="form-label"
+                                            >Gateway</label
+                                        >
+                                        <div class="input-group">
+                                            <input
+                                                type="text"
+                                                name="ethernet.gateway"
+                                                id="ethernet.gateway"
+                                                class="form-control"
+                                                placeholder="192.168.1.1"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3" id="eth-static-config-2" style="display: none;">
+                                    <div class="col-6">
+                                        <label
+                                            for="ethernet.subnet"
+                                            class="form-label"
+                                            >Subnet Mask</label
+                                        >
+                                        <div class="input-group">
+                                            <input
+                                                type="text"
+                                                name="ethernet.subnet"
+                                                id="ethernet.subnet"
+                                                class="form-control"
+                                                placeholder="255.255.255.0"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label
+                                            for="ethernet.dns1"
+                                            class="form-label"
+                                            >Primary DNS</label
+                                        >
+                                        <div class="input-group">
+                                            <input
+                                                type="text"
+                                                name="ethernet.dns1"
+                                                id="ethernet.dns1"
+                                                class="form-control"
+                                                placeholder="8.8.8.8"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3" id="eth-static-config-3" style="display: none;">
+                                    <div class="col-6">
+                                        <label
+                                            for="ethernet.dns2"
+                                            class="form-label"
+                                            >Secondary DNS</label
+                                        >
+                                        <div class="input-group">
+                                            <input
+                                                type="text"
+                                                name="ethernet.dns2"
+                                                id="ethernet.dns2"
+                                                class="form-control"
+                                                placeholder="8.8.4.4"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
                         <div class="row my-5 d-flex align-items-top">
                             <div class="col-lg-3 col-sm-12">
                                 <h5>
@@ -1746,160 +1900,6 @@
                                                 required=""
                                                 step="1"
                                                 min="0"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-
-                        <div class="row my-5 d-flex align-items-top" id="ethernet-section">
-                            <div class="col-lg-3 col-sm-12">
-                                <h5>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="20"
-                                        height="20"
-                                        fill="currentColor"
-                                        class="bi bi-router"
-                                        viewBox="0 0 16 16"
-                                    >
-                                        <path
-                                            d="M5.525 3.025a3.5 3.5 0 0 1 4.95 0 .5.5 0 1 0 .707-.707 4.5 4.5 0 0 0-6.364 0 .5.5 0 0 0 .707.707"
-                                        />
-                                        <path
-                                            d="M6.94 4.44a1.5 1.5 0 0 1 2.12 0 .5.5 0 0 0 .708-.708 2.5 2.5 0 0 0-3.536 0 .5.5 0 0 0 .707.707Z"
-                                        />
-                                        <path
-                                            d="M2.974 2.342a.5.5 0 1 0-.948.316L3.806 8H1.5A1.5 1.5 0 0 0 0 9.5v2A1.5 1.5 0 0 0 1.5 13H2a.5.5 0 0 0 .5.5h2A.5.5 0 0 0 5 13h6a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5h.5a1.5 1.5 0 0 0 1.5-1.5v-2A1.5 1.5 0 0 0 14.5 8h-2.306l1.78-5.342a.5.5 0 1 0-.948-.316L11.14 8H4.86zM2.5 11a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m4.5-.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2.5.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m1.5-.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0"
-                                        />
-                                        <path
-                                            d="M8.5 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"
-                                        />
-                                        <path
-                                            d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"
-                                        />
-                                    </svg>
-                                    Ethernet
-                                </h5>
-                                <small>Wired network connection (LAN8720)</small>
-                            </div>
-                            <div class="col-lg-9 col-sm-12">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-check form-switch">
-                                            <input
-                                                type="checkbox"
-                                                name="ethernet.enabled"
-                                                id="ethernet.enabled"
-                                                class="form-check-input"
-                                            />
-                                            <label
-                                                for="ethernet.enabled"
-                                                class="form-label"
-                                                >Enable Ethernet</label
-                                            >
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-check form-switch">
-                                            <input
-                                                type="checkbox"
-                                                name="ethernet.useStaticIP"
-                                                id="ethernet.useStaticIP"
-                                                class="form-check-input"
-                                            />
-                                            <label
-                                                for="ethernet.useStaticIP"
-                                                class="form-label"
-                                                >Use Static IP</label
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3" id="eth-static-config" style="display: none;">
-                                    <div class="col-6">
-                                        <label
-                                            for="ethernet.staticIP"
-                                            class="form-label"
-                                            >Static IP</label
-                                        >
-                                        <div class="input-group">
-                                            <input
-                                                type="text"
-                                                name="ethernet.staticIP"
-                                                id="ethernet.staticIP"
-                                                class="form-control"
-                                                placeholder="192.168.1.100"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <label
-                                            for="ethernet.gateway"
-                                            class="form-label"
-                                            >Gateway</label
-                                        >
-                                        <div class="input-group">
-                                            <input
-                                                type="text"
-                                                name="ethernet.gateway"
-                                                id="ethernet.gateway"
-                                                class="form-control"
-                                                placeholder="192.168.1.1"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3" id="eth-static-config-2" style="display: none;">
-                                    <div class="col-6">
-                                        <label
-                                            for="ethernet.subnet"
-                                            class="form-label"
-                                            >Subnet Mask</label
-                                        >
-                                        <div class="input-group">
-                                            <input
-                                                type="text"
-                                                name="ethernet.subnet"
-                                                id="ethernet.subnet"
-                                                class="form-control"
-                                                placeholder="255.255.255.0"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <label
-                                            for="ethernet.dns1"
-                                            class="form-label"
-                                            >Primary DNS</label
-                                        >
-                                        <div class="input-group">
-                                            <input
-                                                type="text"
-                                                name="ethernet.dns1"
-                                                id="ethernet.dns1"
-                                                class="form-control"
-                                                placeholder="8.8.8.8"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3" id="eth-static-config-3" style="display: none;">
-                                    <div class="col-6">
-                                        <label
-                                            for="ethernet.dns2"
-                                            class="form-label"
-                                            >Secondary DNS</label
-                                        >
-                                        <div class="input-group">
-                                            <input
-                                                type="text"
-                                                name="ethernet.dns2"
-                                                id="ethernet.dns2"
-                                                class="form-control"
-                                                placeholder="8.8.4.4"
                                             />
                                         </div>
                                     </div>
