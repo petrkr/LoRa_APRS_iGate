@@ -74,7 +74,8 @@ namespace OTA_Utils {
         Serial.println(success ? "OTA update finished successfully!" : "There was an error during OTA update!");
         displayShow("", "", statusMessage, "", rebootMessage, "", "", 4000);
 
-        isUpdatingOTA = false;
+        if (!success) {
+            isUpdatingOTA = false; 
+        }
     }
-
 }
