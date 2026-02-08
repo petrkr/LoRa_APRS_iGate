@@ -92,15 +92,19 @@ namespace APRS_IS_Utils {
     }
 
     void checkStatus() {
-        String wifiState, aprsisState;
-        if (networkManager->isWiFiConnected()) {
-            wifiState = "OK";
+        String netState, aprsisState;
+        if (networkManager->isEthernetConnected()) {
+            netState = "ETH: OK";
+        } else if (networkManager->isWiFiConnected()) {
+            netState = "WiFi: OK";
+        } else if (networkManager->isWifiAPActive()) {
+            netState = "WiFi: AP";
+        } else if (backUpDigiMode || Config.digi.ecoMode == 1 || Config.digi.ecoMode == 2) {
+            netState = "--";
         } else {
-            if (backUpDigiMode || Config.digi.ecoMode == 1 || Config.digi.ecoMode == 2) {
-                wifiState = "--";
-            } else {
-                wifiState = "AP";
-            }
+            netState = "ETH: NO";
+        }
+        if (!networkManager->isConnected()) {
             if (!Config.display.alwaysOn && Config.display.timeout != 0) {
                 displayToggle(true);
             }
@@ -128,8 +132,7 @@ namespace APRS_IS_Utils {
                 lastScreenOn = millis();
             }
         }
-        secondLine = "WiFi: ";
-        secondLine += wifiState;
+        secondLine = netState;
         secondLine += " APRS-IS: ";
         secondLine += aprsisState;
     }
