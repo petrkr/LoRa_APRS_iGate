@@ -93,7 +93,7 @@ namespace WIFI_Utils {
 
         if (!networkManager->hasWiFiNetworks()) {
             Serial.println("WiFi SSID not set!");
-            if (Config.wifiAutoAP.enabled) {
+            if (Config.wifiAutoAP.enabled && !networkManager->isEthernetConnected()) {
                 Serial.println("Starting AP fallback...");
                 startAutoAP();
             }
@@ -114,7 +114,7 @@ namespace WIFI_Utils {
             displayShow("", "     Connected!!", "" , "     loading ...", 1000);
         } else {
             Serial.println("\nNot connected to WiFi!");
-            if (Config.wifiAutoAP.enabled) {
+            if (Config.wifiAutoAP.enabled && !networkManager->isEthernetConnected()) {
                 Serial.println("Starting AP fallback...");
                 displayShow("", " WiFi Not Connected!", "" , "     loading ...", 1000);
                 startAutoAP();
