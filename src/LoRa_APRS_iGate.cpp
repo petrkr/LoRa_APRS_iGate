@@ -103,6 +103,7 @@ String firstLine, secondLine, thirdLine, fourthLine, fifthLine, sixthLine, seven
 
 void setup() {
     Serial.begin(115200);
+    Config.setup();
     networkManager = new NetworkManager();
     networkManager->setup();
     if (Config.wifiAutoAP.enabled) {

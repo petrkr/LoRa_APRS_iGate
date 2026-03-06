@@ -208,9 +208,9 @@ public:
     MQTT                    mqtt;
     ETH_Config              ethConfig;
 
+    void setup();
     void setDefaultValues();
     bool writeFile();
-    Configuration();
 
 private:
     bool readFile();
