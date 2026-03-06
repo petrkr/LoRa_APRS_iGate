@@ -40,13 +40,13 @@ extern const char web_script_js[] asm("_binary_data_embed_script_js_gz_start");
 extern const char web_script_js_end[] asm("_binary_data_embed_script_js_gz_end");
 extern const size_t web_script_js_len = web_script_js_end - web_script_js;
 
-extern const char web_bootstrap_css[] asm("_binary_data_embed_bootstrap_css_gz_start");
-extern const char web_bootstrap_css_end[] asm("_binary_data_embed_bootstrap_css_gz_end");
-extern const size_t web_bootstrap_css_len = web_bootstrap_css_end - web_bootstrap_css;
+extern const char web_bootstrap_min_css[] asm("_binary_data_embed_bootstrap_min_css_gz_start");
+extern const char web_bootstrap_min_css_end[] asm("_binary_data_embed_bootstrap_min_css_gz_end");
+extern const size_t web_bootstrap_min_css_len = web_bootstrap_min_css_end - web_bootstrap_min_css;
 
-extern const char web_bootstrap_js[] asm("_binary_data_embed_bootstrap_js_gz_start");
-extern const char web_bootstrap_js_end[] asm("_binary_data_embed_bootstrap_js_gz_end");
-extern const size_t web_bootstrap_js_len = web_bootstrap_js_end - web_bootstrap_js;
+extern const char web_bootstrap_min_js[] asm("_binary_data_embed_bootstrap_min_js_gz_start");
+extern const char web_bootstrap_min_js_end[] asm("_binary_data_embed_bootstrap_min_js_gz_end");
+extern const size_t web_bootstrap_min_js_len = web_bootstrap_min_js_end - web_bootstrap_min_js;
 
 // Declare external symbols for the embedded image data
 extern const unsigned char favicon_data[] asm("_binary_data_embed_favicon_png_gz_start");
@@ -343,14 +343,14 @@ namespace WEB_Utils {
     }
 
     void handleBootstrapStyle(AsyncWebServerRequest *request) {
-        AsyncWebServerResponse *response = request->beginResponse(200, "text/css", (const uint8_t*)web_bootstrap_css, web_bootstrap_css_len);
+        AsyncWebServerResponse *response = request->beginResponse(200, "text/css", (const uint8_t*)web_bootstrap_min_css, web_bootstrap_min_css_len);
         response->addHeader("Content-Encoding", "gzip");
         response->addHeader("Cache-Control", "max-age=3600");
         request->send(response);
     }
 
     void handleBootstrapScript(AsyncWebServerRequest *request) {
-        AsyncWebServerResponse *response = request->beginResponse(200, "text/javascript", (const uint8_t*)web_bootstrap_js, web_bootstrap_js_len);
+        AsyncWebServerResponse *response = request->beginResponse(200, "text/javascript", (const uint8_t*)web_bootstrap_min_js, web_bootstrap_min_js_len);
         response->addHeader("Content-Encoding", "gzip");
         response->addHeader("Cache-Control", "max-age=3600");
         request->send(response);
@@ -366,8 +366,8 @@ namespace WEB_Utils {
             server.on("/action", HTTP_POST, handleAction);
             server.on("/style.css", HTTP_GET, handleStyle);
             server.on("/script.js", HTTP_GET, handleScript);
-            server.on("/bootstrap.css", HTTP_GET, handleBootstrapStyle);
-            server.on("/bootstrap.js", HTTP_GET, handleBootstrapScript);
+            server.on("/bootstrap.min.css", HTTP_GET, handleBootstrapStyle);
+            server.on("/bootstrap.min.js", HTTP_GET, handleBootstrapScript);
             server.on("/favicon.png", HTTP_GET, handleFavicon);
 
             OTA_Utils::setup(&server); // Include OTA Updater for WebServer
